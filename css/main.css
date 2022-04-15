@@ -5,6 +5,8 @@ body {
   font-weight: 400;
   line-height: 1.4;  /*16px의 1.4배의 행간*/
   font-family: 'Nanum Gothic', sans-serif;
+
+  height: 2000px;
 }
 
 img {
@@ -25,11 +27,68 @@ a {
   position: relative;
 }
 
+.btn { /*우선순위 10점*/
+  width: 130px;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: block;
+  transition: .4s;
+}
+.btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+.btn.btn--reverse { /*우선순위 20점*/
+  background-color: #333;
+  color: #fff;
+}
+.btn.btn--reverse:hover { /*우선순위 30점*/
+  background-color: transparent;
+  color: #333;
+}
+.btn.btn--brown {
+  color: #592B18;
+  border-color: #592B18;
+}
+.btn.btn--brown:hover {
+  color: #fff;
+  background-color: #592B18;
+}
+.btn.btn--gold {
+  color: #d9aa8a;
+  border-color: #d9aa8a;
+}
+.btn.btn--gold:hover {
+  color: #fff;
+  background-color: #d9aa8a;
+}
+.btn.btn-white {
+  color: #fff;
+  border-color: #fff;
+}
+.btn.btn-white:hover {
+  color: #333;
+  background-color: #fff;
+}
 
 /* HEADER */
 header {
   background-color: #f6f5f0;
   border-bottom: 1px solid #c8c8c8;
+  /*뷰포트를 기준으로 배치 
+  position 값이 absolute나 fixed일 경우 가로너비가 최소한으로 줄어들려고 시도함*/
+  /* 헤더 부분은 화면 상단에 고정하기 */
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 9;
 }
 
 header > .inner{ /*자식 선택자로만*/
@@ -222,4 +281,77 @@ header .main-menu .item .item__contents .contents__texture h4 {
 header .main-menu .item .item__contents .contents__texture p {
   color: #669900;
   margin: 4px 0 14px;
+}
+
+header .badges {
+  position: absolute;
+  top: 132px;
+  right: 12px;
+}
+
+header .badges .badge {
+  border-radius: 10px;
+  /* 박스는 둥글게 깎았지만 이미지는 깎인 영역 밖으로도 삐져나오기 때문에*/
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, .15);
+  cursor: pointer;
+}
+
+
+/* VISUAL */
+.visual {
+  margin-top: 120px; /*HEADER의 높이 값, 헤더부분과 안 겹치도록*/
+  background-image: url('../images/visual_bg.jpg');
+  background-position: center;
+}
+
+.visual .inner{
+  height: 646px;
+}
+
+.visual .title{
+  position: absolute;
+  top: 88px;
+  left: -10px;
+}
+
+.visual .title .btn{
+  position: absolute;
+  top: 259px;
+  left: 173px;
+}
+
+.visual .cup1.image{
+  position: absolute;
+  bottom: 0;
+  right: -47px;
+}
+
+.visual .cup1.text{
+  position: absolute;
+  top: 38px;
+  right: 171px;
+}
+
+.visual .cup2.image{
+  position: absolute;
+  bottom: 0;
+  right: 162px;
+}
+
+.visual .cup2.text{
+  position: absolute;
+  top: 321px;
+  right: 416px;
+}
+
+.visual .spoon{
+  position: absolute;
+  bottom: 0;
+  left: 275px;
+}
+
+.visual .fade-in {
+  opacity: 0;
 }
