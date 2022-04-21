@@ -24,6 +24,7 @@ searchInput.addEventListener('blur', function () {
 
 
 const badges = document.querySelector('header .badges');
+const toTopEl = document.querySelector('#to-top');
 
 //window 객체: 브라우저 창 화면 자체를 의미
 //throttle : 함수가 우르르 실행되는 것을 방지하도록 0.3초간 부하를 준다
@@ -41,14 +42,32 @@ window.addEventListener('scroll', _.throttle(function () {
       opacity: 0,
       display: 'none'
     });
+
+
+    //버튼 보이기
+    gsap.to(toTopEl, 0.2, {
+      x: 0
+    })
+
   } else {
     //배지 보이기
     gsap.to(badges, .6, {
       opacity: 1,
       display: 'block'
     });
+
+    //버튼 숨기기
+    gsap.to(toTopEl, 0.2, {
+      x: 100
+    })
   }
 }, 300));
+
+toTopEl.addEventListener('click', function (){
+  gsap.to(window, .7, {
+    scrollTo: 0   //gsap의 scrollToPlugIn CDN
+  })
+});
 
 //VISUAL 이미지들 순차적으로 하나씩 나타나도록
 const fadeEls = document.querySelectorAll('.visual .fade-in');
@@ -128,3 +147,35 @@ function floatingObject(selector, delay, size){
 floatingObject('.floating1', 1, 15);
 floatingObject('.floating2', .5, 15);
 floatingObject('.floating3', 1.5, 20);
+
+
+const spyEls = document.querySelectorAll('section.scroll-spy');
+spyEls.forEach(function (spyEl) {
+  //메소드체이닝 : 스크롤 감시.클래스넣었다뺐다.
+  new ScrollMagic
+    .Scene({
+      triggerElement: spyEl, //보여짐 여부를 감시할 요소를 지정
+      triggerHook: .8 //(현재 뷰포트의 맨 위는 0, 맨 아래는 1) 뷰포트의 0.8 지점에 걸렸을 때
+    })
+    .setClassToggle(spyEl, 'show')
+    .addTo(new ScrollMagic.Controller());
+
+});
+
+
+new Swiper('.awards .swiper', {
+  direction: 'horizontal',
+  autoplay: true,
+  loop: true,
+  spaceBetween: 30,
+  slidesPerView: 5, //한 번에 5개의 슬라이드 보이게
+  navigation: {
+    prevEl: '.awards .swiper-prev',
+    nextEl: '.awards .swiper-next'
+  }
+});
+
+
+const thisYear = document.querySelector('.this-year');
+thisYear.textContent = new Date().getFullYear();
+
